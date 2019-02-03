@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var numberOfInstalledApps;
-  var installedApps;
+  List<App> installedApps;
   var wallpaper;
 
   @override
@@ -50,8 +50,11 @@ class _MyAppState extends State<MyApp> {
                 child: new Text("Launch Something"),
                 onPressed: () {
                   // Launch the first app available
-                  LauncherAssist.launchApp(installedApps[0]["package"]);
+                  LauncherAssist.launchApp(installedApps[0].package);
                 }),
+            (installedApps.length>0)
+                ? Image.memory(installedApps[0].icon)
+                : Container(),
             wallpaper != null
                 ? new Image.memory(wallpaper, fit: BoxFit.scaleDown)
                 : new Center()
